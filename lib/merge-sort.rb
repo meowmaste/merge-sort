@@ -1,16 +1,17 @@
-def  merge_sort(array)
+
+def merge(array)
   return array if array.count <= 1
 
   middle = array.count/2
-  left = array.slice(0, middle)
-  right = array.slice(middle, array.count - middle)
+  left = merge(array.slice(0, middle))
+  right = merge(array.slice(middle, array.count - middle))
 
   array = []
   offset_l = 0
   offset_r = 0
-  while offset_l < part_l.count && offset_r < part_r.count
-    l = part_l[offset_l]
-    r = part_r[offset_r]
+  while offset_l < left.count && offset_r < right.count
+    l = left[offset_l]
+    r = right[offset_r]
 
     if l <= r   
       array << l
@@ -21,16 +22,18 @@ def  merge_sort(array)
     end
   end 
 
-  while offset_l < part_l.count
-    array << part_l[offset_l]
+  while offset_l < left.count
+    array << left[offset_l]
     offset_l += 1
   end
 
-  while offset_r < part_r.count
-    array << part_r[offset_r]
+  while offset_r < right.count
+    array << right[offset_r]
     offset_r += 1
   end
 
   return array
+end
 
-end 
+ar = merge([6,33,42,8,100,13, 66, -85, 0.8])
+puts ar
